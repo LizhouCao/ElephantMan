@@ -11,6 +11,6 @@ public class Ground : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        this.transform.Translate(new Vector3(-0.1f, 0.0f, 0.0f));
+        this.transform.Translate(SceneCtrl.context.Elephant.Speed * new Vector3(-1.0f, 0.0f, 0.0f));
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    int m_life = 3;
+    public int Life = 3;
+    public bool HitAble = true;
+
 	// Use this for initialization
 	void Start () {
         	
@@ -11,24 +13,26 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (this.transform.position.x < -15.0f)
+            Destroy(this.gameObject);
 	}
 
+    void FixedUpdate() {
+        this.transform.Translate(SceneCtrl.context.Elephant.Speed * new Vector3(-1.0f, 0.0f, 0.0f));
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        print(collision.gameObject.name);
-        if (collision.gameObject.tag == "Bullet") {
-            Destroy(collision.gameObject);
-            LoseLife();
+        if (HitAble) {
+            if (collision.gameObject.tag == "Bullet") {
+                Destroy(collision.gameObject);
+                LoseLife();
+            }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        print("aoao " + collision.gameObject.name);
-    }
-
     private void LoseLife() {
-        m_life--;
-        if (m_life == 0) {
+        Life--;
+        if (Life == 0) {
             Destroy(this.gameObject);
         }
     }
