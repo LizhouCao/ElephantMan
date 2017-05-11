@@ -10,10 +10,13 @@ public class ElephantCtrl : MonoBehaviour {
     bool m_isGrounded = false;
 
     int m_life = 5;
+    int m_score = 0;
 
     public Text lifeText;
+    public Text scoreText;
+
     public GameObject Bullet_Prefab;
-    public float Speed = 0.1f;
+    public float Speed;
 
 
     float m_lastY;
@@ -25,7 +28,7 @@ public class ElephantCtrl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        lifeText.text = m_life.ToString();
+        lifeText.text = "Life:" + m_life.ToString();
         m_lastY = this.transform.position.y;
         m_groundCheck = this.transform.FindChild("GroundCheck");
     }
@@ -67,25 +70,38 @@ public class ElephantCtrl : MonoBehaviour {
 
     void LoseLife () {
         m_life--;
-        lifeText.text = m_life.ToString();
+        lifeText.text = "Life: " + m_life.ToString();
         if (m_life == 0) {
             LoseGame();
         }
     }
 
     void LoseGame() {
-        Destroy(this.gameObject);
+        Speed = 0.0f;
+        SceneCtrl.context.ElephantDie();
+        // Destroy(this.gameObject);
     }
 
+    public void GainScore() {
+        m_score++;
+        scoreText.text = "Score: " + m_score.ToString();
+    }
+
+    /*
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             LoseLife();
+            print("collision");
         }
     }
+    */
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             LoseLife();
+        }
+        else if (collision.gameObject.tag == "Item") {
+            collision.GetComponent<Item>().Eated();
         }
     }
 }

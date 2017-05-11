@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneCtrl : MonoBehaviour {
     public static SceneCtrl context;
@@ -23,4 +24,20 @@ public class SceneCtrl : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void BossDie() {
+        Invoke("Win", 2.0f);
+    }
+
+    public void ElephantDie() {
+        Invoke("Lose", 2.0f);
+    }
+
+    void Win() {
+        SceneManager.LoadScene("Win");
+    }
+
+    void Lose() {
+        SceneManager.LoadScene("Lose");
+    }
 }

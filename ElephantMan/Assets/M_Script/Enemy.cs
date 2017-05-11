@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (this.transform.position.x < -15.0f)
+        if (this.transform.position.x < -20.0f)
             Destroy(this.gameObject);
 	}
 
@@ -21,10 +21,10 @@ public class Enemy : MonoBehaviour {
         this.transform.Translate(SceneCtrl.context.Elephant.Speed * new Vector3(-1.0f, 0.0f, 0.0f));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (HitAble) {
-            if (collision.gameObject.tag == "Bullet") {
-                Destroy(collision.gameObject);
+    private void OnTriggerEnter2D(Collider2D collision) {     
+        if (collision.gameObject.tag == "Bullet") {
+            Destroy(collision.gameObject);
+            if (HitAble) {
                 LoseLife();
             }
         }
