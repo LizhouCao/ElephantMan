@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour {
+public class Boss : M_Object {
     float m_speed = 0.02f;
     public int Life;
     private bool HitAble = false;
@@ -24,7 +24,7 @@ public class Boss : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	override protected void Update () {
 		
 	}
 

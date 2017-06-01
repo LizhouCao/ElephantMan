@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ground : MonoBehaviour {
-    float endPosition = -20.0f;
-    float startPosition = 20.0f;
+    float endPosition = -30.0f;
+    float startPosition = 10.0f;
 	// Use this for initialization
 	void Start () {
 		
